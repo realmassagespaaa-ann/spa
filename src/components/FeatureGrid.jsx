@@ -18,8 +18,8 @@ const features = [
   {
     title: 'Membership That Makes Sense',
     body: 'One credit a month, rollover up to three, 15% off any additional sessions and all retail. No annual contract, no initiation fee, no "first month free then surprise you" pricing. Just a lower rate for people who come back.',
-    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=800&q=80',
-    alt: 'Warm wooden massage table with folded linens and a small ceramic bowl of oil',
+    video: '/videos/membership-that-makes-sense.mp4',
+    alt: 'Membership That Makes Sense promotional video',
     reversed: false,
   },
 ]
@@ -39,12 +39,25 @@ export default function FeatureGrid() {
           >
             <div className={`${f.reversed ? 'md:order-2' : ''}`}>
               <div className="relative h-[320px] md:h-[400px] overflow-hidden rounded-sm">
-                <img
-                  src={f.image}
-                  alt={f.alt}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                {f.video ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  >
+                    <source src={f.video} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img
+                    src={f.image}
+                    alt={f.alt}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-stone/10" />
               </div>
             </div>

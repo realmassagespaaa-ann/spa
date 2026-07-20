@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import logoSrc from '../assets/images/logo-real-massage-embassy-spa.webp'
 
 const links = [
   { label: 'Treatments', href: '#treatments' },
@@ -25,8 +26,8 @@ export default function Nav() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
-        <a href="#" className="font-display text-xl text-stone tracking-tight leading-tight">
-          Real Massage Embassy <span className="text-ember">&amp;</span> Spa
+        <a href="#" className="block h-9">
+          <img src={logoSrc} alt="Real Massage Embassy & Spa" className="h-full w-auto" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
