@@ -2,6 +2,10 @@ import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import deepTissueImg from '../assets/images/treatments-massage-deep-tissue.webp'
+import swedishImg from '../assets/images/treatments-massage-swedish.webp'
+import hotStoneImg from '../assets/images/treatments-massage-hot-stone.webp'
+import prenatalImg from '../assets/images/treatments-massage-prenatal.webp'
+import sportsRecoveryImg from '../assets/images/treatments-massage-sports-recovery.webp'
 
 const categories = [
   {
@@ -9,10 +13,10 @@ const categories = [
     tagline: 'Deep work, warm hands, real relief',
     treatments: [
       { name: 'Deep Tissue', duration: '60 / 90 min', price: '$95 / $135', image: deepTissueImg },
-      { name: 'Swedish', duration: '60 / 90 min', price: '$85 / $125', image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80' },
-      { name: 'Hot Stone', duration: '75 min', price: '$120', image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80' },
-      { name: 'Prenatal', duration: '60 min', price: '$95', image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80' },
-      { name: 'Sports Recovery', duration: '60 / 90 min', price: '$105 / $145', image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80' },
+      { name: 'Swedish', duration: '60 / 90 min', price: '$85 / $125', image: swedishImg },
+      { name: 'Hot Stone', duration: '75 min', price: '$120', image: hotStoneImg },
+      { name: 'Prenatal', duration: '60 min', price: '$95', image: prenatalImg },
+      { name: 'Sports Recovery', duration: '60 / 90 min', price: '$105 / $145', image: sportsRecoveryImg },
     ],
   },
   {
@@ -68,10 +72,6 @@ function Card({ t, isCenter }) {
         <div className="absolute inset-0 bg-gradient-to-t from-stone/80 via-stone/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-vapor">
           <h3 className="font-display text-lg leading-tight">{t.name}</h3>
-          <div className="mt-1 flex items-center gap-3 text-xs font-mono text-vapor/70">
-            <span>{t.duration}</span>
-            <span className="text-ember font-medium">{t.price}</span>
-          </div>
         </div>
       </div>
     </div>
