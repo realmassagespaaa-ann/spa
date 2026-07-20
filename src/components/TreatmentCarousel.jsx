@@ -19,34 +19,7 @@ const categories = [
       { name: 'Sports Recovery', duration: '60 / 90 min', price: '$105 / $145', image: sportsRecoveryImg },
     ],
   },
-  {
-    name: 'Body Treatments',
-    tagline: 'Scrub, wrap, reset',
-    treatments: [
-      { name: 'Salt & Oil Scrub', duration: '60 min', price: '$110', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=600&q=80' },
-      { name: 'Herbal Wrap', duration: '75 min', price: '$125', image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=80' },
-      { name: 'Detox Mud Wrap', duration: '75 min', price: '$135', image: 'https://images.unsplash.com/photo-1488312022048-c5a1ac5ff336?w=600&q=80' },
-    ],
-  },
-  {
-    name: 'Facials',
-    tagline: 'Skin that looks like you slept',
-    treatments: [
-      { name: 'Classic Facial', duration: '60 min', price: '$95', image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80' },
-      { name: 'HydraGlow', duration: '75 min', price: '$130', image: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80' },
-      { name: 'Acne Rescue', duration: '60 min', price: '$105', image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80' },
-    ],
-  },
-  {
-    name: 'Add-On Rituals',
-    tagline: 'Small upgrades, noticeable difference',
-    treatments: [
-      { name: 'Scalp Massage', duration: '15 min', price: '$25', image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80' },
-      { name: 'Cupping', duration: '20 min', price: '$40', image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80' },
-      { name: 'Aromatherapy Boost', duration: '—', price: '$15', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=600&q=80' },
-      { name: 'Hot Towel Neck Wrap', duration: '10 min', price: '$18', image: 'https://images.unsplash.com/photo-1488312022048-c5a1ac5ff336?w=600&q=80' },
-    ],
-  },
+
 ]
 
 function Card({ t, isCenter }) {
