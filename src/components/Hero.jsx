@@ -15,6 +15,10 @@ export default function Hero() {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.5
+  }, [reduceMotion])
+
   return (
     <section className="relative h-dvh min-h-[560px] flex items-center justify-center overflow-hidden bg-neutral-900">
       {/* hero-bg-02.mp4 available in /public/videos — reserved for A/B variant or alternate page */}
