@@ -1,27 +1,19 @@
 import { motion } from 'framer-motion'
 
+const ceo = {
+  name: 'Ikayi Annah Ediri',
+  role: 'CEO',
+  image: null, // swap to "/images/team-ikayi-annah-ediri.webp" once available
+}
+
 const therapists = [
-  {
-    name: 'Mara Reyes',
-    specialty: 'Deep Tissue & Sports Recovery',
-    bio: 'Twelve years of working with construction crews, distance runners, and anyone who spends their days hunched over a desk. Mara believes the best treatment plan is the one you actually stick with — so she meets you at your tolerance, not hers.',
-    quote: '"I don\'t need to hurt you to help you. I need to listen to what your tissue is saying."',
-    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&q=80',
-  },
-  {
-    name: 'James Okonkwo',
-    specialty: 'Swedish & Prenatal Massage',
-    bio: 'Trained in both clinical massage and midwifery-adjacent bodywork. James brings a steady, unhurried presence to every session. His regulars say he has a gift for finding the exact pressure their body needs without being asked.',
-    quote: '"A good massage changes how you sit in your body for the rest of the day. That\'s the goal."',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
-  },
-  {
-    name: 'Lena Park',
-    specialty: 'Facials & Body Treatments',
-    bio: 'Lena approaches skin and bodywork the same way: as a conversation, not a procedure. She spent five years at a destination spa before joining Real — and brought back a conviction that great treatments don\'t need a resort price tag.',
-    quote: '"Your skin tells a story. I just help it read better."',
-    image: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&q=80',
-  },
+  { name: 'Mirabel', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Dorcas', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Blessing', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Merit', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Glory', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Gift', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Miracle', role: 'Personal Assistant', image: null },
 ]
 
 export default function TeamSpotlight() {
@@ -35,38 +27,62 @@ export default function TeamSpotlight() {
           className="mb-14"
         >
           <h2 className="font-display text-3xl md:text-4xl text-stone">
-            The hands behind the work
+            Meet the Therapists
           </h2>
           <p className="mt-2 text-stone/60 max-w-lg">
-            Every therapist at Real Massage and Spa is a licensed practitioner who stays in the same studio — so they remember your last session, your preferences, and what changed since you came in.
+            Our team of skilled professionals is here to help you look, feel, and live better.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-10 md:gap-8">
+        {/* CEO card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          className="mb-12 group"
+        >
+          <div className="relative aspect-[16/9] md:aspect-[4/1] overflow-hidden rounded-sm mb-4 bg-stone/20 flex items-center justify-center">
+            {ceo.image ? (
+              <img
+                src={ceo.image}
+                alt={ceo.name}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            ) : (
+              <div className="flex flex-col items-center text-stone/30">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span className="text-xs font-mono mt-1">{ceo.name}</span>
+              </div>
+            )}
+          </div>
+          <h3 className="font-display text-xl text-stone">{ceo.name}</h3>
+          <p className="text-xs font-mono text-sage uppercase tracking-wide mt-1">{ceo.role}</p>
+        </motion.div>
+
+        {/* Therapists grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">
           {therapists.map((t, i) => (
             <motion.div
               key={t.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
               className="group"
             >
-              <div className="relative h-[300px] overflow-hidden rounded-sm mb-4">
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone/40 to-transparent" />
+              <div className="relative aspect-square overflow-hidden rounded-sm mb-3 bg-stone/20 flex items-center justify-center">
+                {t.image ? (
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" className="text-stone/30" opacity="0.4"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                )}
               </div>
-              <h3 className="font-display text-xl text-stone">{t.name}</h3>
-              <p className="text-xs font-mono text-sage uppercase tracking-wide mt-1">{t.specialty}</p>
-              <p className="text-sm text-stone/70 mt-3 leading-relaxed">{t.bio}</p>
-              <blockquote className="mt-4 text-sm italic text-stone/50 border-l-2 border-clay pl-3">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
+              <h3 className="font-display text-base md:text-lg text-stone text-center">{t.name}</h3>
+              <p className="text-xs font-mono text-sage text-center mt-0.5">{t.role}</p>
             </motion.div>
           ))}
         </div>

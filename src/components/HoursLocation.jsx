@@ -10,58 +10,59 @@ const hours = [
   { day: 'Sunday', time: '10am – 4pm' },
 ]
 
+const branches = [
+  {
+    name: 'Ugbolokposo Branch',
+    address: 'King Jackson Hotel (opposite Bedouin Hotel), Ugbolokposo',
+    phone: '+234 813 343 5521',
+  },
+  {
+    name: 'Orerokpe Branch',
+    address: 'Dorvile Hotel, Orerokpe',
+    phone: '+234 813 343 5521',
+  },
+]
+
 export default function HoursLocation() {
   return (
     <section id="hours" className="bg-vapor py-24 md:py-32 px-5">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 md:gap-20">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+      <div className="max-w-6xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="font-display text-3xl md:text-4xl text-stone text-center mb-14"
         >
-          <h2 className="font-display text-3xl md:text-4xl text-stone">Hours</h2>
-          <p className="text-sm text-stone/60 mt-2">Walk-ins welcome, but sessions are guaranteed with a booking.</p>
+          Hours &amp; Location
+        </motion.h2>
 
-          <div className="mt-6 space-y-1.5">
-            {hours.map((h) => (
-              <div key={h.day} className="flex items-center justify-between py-1.5 border-b border-stone/10">
-                <span className="text-sm text-stone/80">{h.day}</span>
-                <span className="text-sm font-mono text-stone/60">{h.time}</span>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+          {branches.map((branch, bIdx) => (
+            <motion.div
+              key={branch.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: bIdx * 0.1 }}
+              className="border border-stone/10 rounded-sm p-6 md:p-8"
+            >
+              <h3 className="font-display text-xl md:text-2xl text-stone">{branch.name}</h3>
+              <p className="text-sm text-stone/70 mt-2 leading-relaxed">{branch.address}</p>
+              <p className="text-sm font-mono text-stone/50 mt-1">{branch.phone}</p>
+
+              <div className="mt-6 space-y-1.5">
+                {hours.map((h) => (
+                  <div key={h.day} className="flex items-center justify-between py-1.5 border-b border-stone/10">
+                    <span className="text-sm text-stone/80">{h.day}</span>
+                    <span className="text-sm font-mono text-stone/60">{h.time}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-        >
-          <h2 className="font-display text-3xl md:text-4xl text-stone">Location</h2>
-
-          <div className="mt-6 space-y-2 text-stone/70 text-sm leading-relaxed">
-            <p>342 Walnut Street, Suite 102</p>
-            <p>Portland, OR 97204</p>
-            <p className="font-mono text-xs mt-4">(503) 555–0142</p>
-            <p>
-              <a
-                href="#"
-                className="text-sage hover:text-stone transition-colors focus-visible:outline-2 focus-visible:outline-ember"
-              >
-                hello@realmassagespa.com
-              </a>
-            </p>
-            <p className="mt-3 text-stone/50 max-w-sm">
-              One block from the Morrison Bridge streetcar stop. Street parking free after 6pm. A bike rack is out front.
-            </p>
-          </div>
-
-          {/* Map placeholder */}
-          <div className="mt-6 h-[200px] bg-stone/5 rounded-sm flex items-center justify-center text-xs text-stone/30 font-mono border border-stone/10">
-            Map — 342 Walnut St, Portland
-          </div>
-        </motion.div>
+              <p className="text-xs text-stone/40 mt-4">Walk-ins welcome, but sessions are guaranteed with a booking.</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
