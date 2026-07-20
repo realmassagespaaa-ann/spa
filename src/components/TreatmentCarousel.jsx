@@ -1,12 +1,14 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
+import deepTissueImg from '../assets/images/treatments-massage-deep-tissue.webp'
+
 const categories = [
   {
     name: 'Massages',
     tagline: 'Deep work, warm hands, real relief',
     treatments: [
-      { name: 'Deep Tissue', duration: '60 / 90 min', price: '$95 / $135', image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80' },
+      { name: 'Deep Tissue', duration: '60 / 90 min', price: '$95 / $135', image: deepTissueImg },
       { name: 'Swedish', duration: '60 / 90 min', price: '$85 / $125', image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&q=80' },
       { name: 'Hot Stone', duration: '75 min', price: '$120', image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&q=80' },
       { name: 'Prenatal', duration: '60 min', price: '$95', image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80' },
@@ -80,6 +82,14 @@ function CategorySection({ cat, index }) {
   const scrollRef = useRef(null)
   const [centerIndex, setCenterIndex] = useState(0)
 
+  const scrollBy = (direction) => {
+    const el = scrollRef.current
+    if (!el) return
+    const card = el.querySelector('.card-wrapper')
+    const cardWidth = card ? card.getBoundingClientRect().width + (window.innerWidth >= 768 ? 20 : 16) : 300
+    el.scrollBy({ left: direction * cardWidth, behavior: 'smooth' })
+  }
+
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
@@ -117,22 +127,43 @@ function CategorySection({ cat, index }) {
             <h2 className="font-display text-2xl md:text-3xl text-stone">{cat.name}</h2>
             <p className="text-sm text-stone/60 mt-1">{cat.tagline}</p>
           </div>
-          <button className="text-xs font-mono text-sage hover:text-stone transition-colors focus-visible:outline-2 focus-visible:outline-ember">
-            View all &rarr;
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scrollBy(-1)}
+              aria-label="Scroll left"
+              className="hidden sm:grid place-items-center w-8 h-8 rounded-full border border-stone/20 text-stone/60 hover:text-stone hover:border-stone/40 transition-colors focus-visible:outline-2 focus-visible:outline-ember"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2.5L4 6l3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+            <button
+              onClick={() => scrollBy(1)}
+              aria-label="Scroll right"
+              className="hidden sm:grid place-items-center w-8 h-8 rounded-full border border-stone/20 text-stone/60 hover:text-stone hover:border-stone/40 transition-colors focus-visible:outline-2 focus-visible:outline-ember"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2.5L8 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+            <button className="text-xs font-mono text-sage hover:text-stone transition-colors focus-visible:outline-2 focus-visible:outline-ember">
+              View all &rarr;
+            </button>
+          </div>
         </div>
       </div>
 
       <div
         ref={scrollRef}
         className="flex gap-4 md:gap-5 overflow-x-auto px-5 scrollbar-hide pb-4"
-        style={{ scrollSnapType: 'x mandatory' }}
+        style={{
+          scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
+          overscrollBehaviorX: 'contain',
+        }}
       >
         {cat.treatments.map((t, i) => (
-          <div key={t.name} className="card-wrapper" style={{ scrollSnapAlign: 'center' }}>
+          <div key={t.name} className="card-wrapper shrink-0" style={{ scrollSnapAlign: 'start' }}>
             <Card t={t} isCenter={i === centerIndex} />
           </div>
         ))}
+        <div className="min-w-5 md:min-w-[20px] shrink-0" />
       </div>
     </section>
   )
