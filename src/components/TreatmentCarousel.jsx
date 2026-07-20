@@ -93,7 +93,7 @@ function CategorySection({ cat, index }) {
   }, [])
 
   return (
-    <section className="py-16 md:py-20 first:pt-0">
+    <section className="py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-5 mb-6">
         <div className="flex items-end justify-between">
           <div>
@@ -143,27 +143,31 @@ function CategorySection({ cat, index }) {
 }
 
 export default function TreatmentCarousel() {
+  const showTreatmentsHeader = false // TODO: set to true to show header
+
   return (
     <section id="treatments" className="bg-vapor pb-8">
-      <div className="max-w-7xl mx-auto px-5 pt-20 pb-2">
-        <motion.h2
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-display text-3xl md:text-4xl text-stone"
-        >
-          Treatments
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="mt-2 text-stone/60 max-w-lg"
-        >
-          Every price is what you pay. No upsell, no surprise fees.
-        </motion.p>
-      </div>
+      {showTreatmentsHeader && (
+        <div className="max-w-7xl mx-auto px-5 pt-20 pb-2">
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-display text-3xl md:text-4xl text-stone"
+          >
+            Treatments
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-2 text-stone/60 max-w-lg"
+          >
+            Every price is what you pay. No upsell, no surprise fees.
+          </motion.p>
+        </div>
+      )}
 
       {categories.map((cat, i) => (
         <CategorySection key={cat.name} cat={cat} index={i} />
