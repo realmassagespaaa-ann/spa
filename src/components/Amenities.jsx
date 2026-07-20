@@ -24,6 +24,10 @@ const amenities = [
 ]
 
 export default function Amenities() {
+  const showSpaceSection = false // TODO: set to true to restore The Space section
+
+  if (!showSpaceSection) return null
+
   return (
     <section className="bg-warmth/20 py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 mb-8">
