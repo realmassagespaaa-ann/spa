@@ -6,6 +6,7 @@ import blessingImg from '../assets/images/team-blessing.webp'
 import meritImg from '../assets/images/team-merit.webp'
 import gloryImg from '../assets/images/team-glory.webp'
 import giftImg from '../assets/images/team-gift.webp'
+import miracleImg from '../assets/images/team-miracle.webp'
 
 const ceo = {
   name: 'Ikayi Annah Ediri',
@@ -20,7 +21,7 @@ const therapists = [
   { name: 'Merit', role: 'Spa/Massage Therapist', image: meritImg },
   { name: 'Glory', role: 'Spa/Massage Therapist', image: gloryImg },
   { name: 'Gift', role: 'Spa/Massage Therapist', image: giftImg },
-  { name: 'Miracle', role: 'Personal Assistant', image: null },
+  { name: 'Miracle', role: 'Personal Assistant', image: miracleImg },
 ]
 
 export default function TeamSpotlight() {
@@ -53,7 +54,7 @@ export default function TeamSpotlight() {
               <img
                 src={ceo.image}
                 alt={ceo.name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
             ) : (
               <div className="flex flex-col items-center text-stone/30">

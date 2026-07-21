@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import logoSrc from '../assets/images/logo-real-massage-embassy-spa.webp'
+import logoSrc from '../assets/images/logo.webp'
 
 const links = [
   { label: 'Treatments', href: '#treatments' },
