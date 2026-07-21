@@ -25,17 +25,17 @@ const TOTAL_CARDS = 5
 const CYCLE_MS = 2800
 
 const BG_SLOTS_DESKTOP = [
-  { x: '-34%', y: '18%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
-  { x: '34%', y: '18%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
-  { x: '-18%', y: '36%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
-  { x: '18%', y: '36%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
+  { x: '-70%', y: '-28%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
+  { x: '70%', y: '-28%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
+  { x: '-55%', y: '32%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
+  { x: '55%', y: '32%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
 ]
 
 const BG_SLOTS_MOBILE = [
-  { x: '-42%', y: '10%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
-  { x: '42%', y: '10%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
-  { x: '-36%', y: '22%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
-  { x: '36%', y: '22%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
+  { x: '-45%', y: '-22%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
+  { x: '45%', y: '-22%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
+  { x: '-35%', y: '28%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
+  { x: '35%', y: '28%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
 ]
 
 function getBgSlot(cardIndex, activeIndex, isMobile) {
