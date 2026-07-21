@@ -20,23 +20,26 @@ const categories = [
   },
 ]
 
-const kenBurnsClasses = [
-  'animate-ken-burns-1',
-  'animate-ken-burns-2',
-  'animate-ken-burns-3',
-  'animate-ken-burns-2',
-  'animate-ken-burns-1',
+const kenBurnsVariants = [
+  { scale: [1, 1.1, 1], x: ['0%', '-1.5%', '0%'], y: ['0%', '-1%', '0%'], duration: 18 },
+  { scale: [1, 1.1, 1], x: ['0%', '1.5%', '0%'], y: ['0%', '0.5%', '0%'], duration: 20 },
+  { scale: [1, 1.08, 1], x: ['0%', '-0.5%', '0%'], y: ['0%', '1.5%', '0%'], duration: 22 },
+  { scale: [1, 1.1, 1], x: ['0%', '1.5%', '0%'], y: ['0%', '0.5%', '0%'], duration: 19 },
+  { scale: [1, 1.1, 1], x: ['0%', '-1.5%', '0%'], y: ['0%', '-1%', '0%'], duration: 21 },
 ]
 
 function Card({ t, index }) {
+  const v = kenBurnsVariants[index % kenBurnsVariants.length]
   return (
     <div className="relative group">
       <div className="relative h-[340px] rounded-sm overflow-hidden shadow-[0_2px_8px_rgba(61,50,43,0.08)] transition-all duration-500 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_8px_24px_rgba(61,50,43,0.15)]">
-        <img
+        <motion.img
           src={t.image}
           alt={t.name}
           loading="lazy"
-          className={`absolute inset-0 w-full h-full object-cover ${kenBurnsClasses[index % kenBurnsClasses.length]}`}
+          className="absolute inset-0 w-full h-full object-cover"
+          animate={{ scale: v.scale, x: v.x, y: v.y }}
+          transition={{ duration: v.duration, ease: 'easeInOut', repeat: Infinity }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone/80 via-stone/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-vapor">
