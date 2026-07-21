@@ -1,4 +1,3 @@
-import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import deepTissueImg from '../assets/images/treatments-massage-deep-tissue.webp'
@@ -19,32 +18,30 @@ const categories = [
       { name: 'Sports Recovery', duration: '60 / 90 min', price: '$105 / $145', image: sportsRecoveryImg },
     ],
   },
-
 ]
 
-function Card({ t, isCenter }) {
+const kenBurnsClasses = [
+  'animate-[ken-burns-1_18s_ease-in-out_infinite]',
+  'animate-[ken-burns-2_20s_ease-in-out_infinite]',
+  'animate-[ken-burns-3_22s_ease-in-out_infinite]',
+  'animate-[ken-burns-2_19s_ease-in-out_infinite]',
+  'animate-[ken-burns-1_21s_ease-in-out_infinite]',
+]
+
+function Card({ t, index }) {
   return (
-    <div
-      className={`relative flex-shrink-0 w-[260px] sm:w-[280px] group cursor-pointer transition-all duration-500 ease-out ${
-        isCenter ? 'scale-[1.02] z-10' : 'scale-100 z-0'
-      }`}
-    >
-      <div
-        className={`relative h-[340px] rounded-sm overflow-hidden transition-all duration-500 ease-out group-hover:-translate-y-1.5 ${
-          isCenter
-            ? 'shadow-[0_8px_30px_rgba(193,127,89,0.25)]'
-            : 'shadow-[0_2px_8px_rgba(61,50,43,0.08)] group-hover:shadow-[0_8px_24px_rgba(61,50,43,0.15)]'
-        }`}
-      >
+    <div className="relative group">
+      <div className="relative h-[340px] rounded-sm overflow-hidden shadow-[0_2px_8px_rgba(61,50,43,0.08)] transition-all duration-500 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_8px_24px_rgba(61,50,43,0.15)]">
         <img
           src={t.image}
           alt={t.name}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className={`absolute inset-0 w-full h-full object-cover ${kenBurnsClasses[index % kenBurnsClasses.length]}`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone/80 via-stone/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-vapor">
           <h3 className="font-display text-lg leading-tight">{t.name}</h3>
+          <p className="text-xs text-vapor/60 mt-0.5">{t.duration} &middot; {t.price}</p>
         </div>
       </div>
     </div>
@@ -52,98 +49,36 @@ function Card({ t, isCenter }) {
 }
 
 function CategorySection({ cat, index }) {
-  const scrollRef = useRef(null)
-  const [centerIndex, setCenterIndex] = useState(0)
-
-  const scrollBy = (direction) => {
-    const el = scrollRef.current
-    if (!el) return
-    const card = el.querySelector('.card-wrapper')
-    const cardWidth = card ? card.getBoundingClientRect().width + (window.innerWidth >= 768 ? 20 : 16) : 300
-    el.scrollBy({ left: direction * cardWidth, behavior: 'smooth' })
-  }
-
-  useEffect(() => {
-    const el = scrollRef.current
-    if (!el) return
-
-    const handleScroll = () => {
-      const containerRect = el.getBoundingClientRect()
-      const containerCenter = containerRect.left + containerRect.width / 2
-      const cards = el.querySelectorAll('.card-wrapper')
-      let closestIdx = 0
-      let closestDist = Infinity
-
-      cards.forEach((card, i) => {
-        const cardRect = card.getBoundingClientRect()
-        const cardCenter = cardRect.left + cardRect.width / 2
-        const dist = Math.abs(cardCenter - containerCenter)
-        if (dist < closestDist) {
-          closestDist = dist
-          closestIdx = i
-        }
-      })
-
-      setCenterIndex(closestIdx)
-    }
-
-    el.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => el.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
     <section className="py-16 md:py-20">
-      <div className="max-w-7xl mx-auto px-5 mb-6">
-        <div className="flex items-end justify-between">
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl text-stone">{cat.name}</h2>
-            <p className="text-sm text-stone/60 mt-1">{cat.tagline}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => scrollBy(-1)}
-              aria-label="Scroll left"
-              className="hidden sm:grid place-items-center w-8 h-8 rounded-full border border-stone/20 text-stone/60 hover:text-stone hover:border-stone/40 transition-colors focus-visible:outline-2 focus-visible:outline-ember"
-            >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2.5L4 6l3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-            <button
-              onClick={() => scrollBy(1)}
-              aria-label="Scroll right"
-              className="hidden sm:grid place-items-center w-8 h-8 rounded-full border border-stone/20 text-stone/60 hover:text-stone hover:border-stone/40 transition-colors focus-visible:outline-2 focus-visible:outline-ember"
-            >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2.5L8 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-            <button className="text-xs font-mono text-sage hover:text-stone transition-colors focus-visible:outline-2 focus-visible:outline-ember">
-              View all &rarr;
-            </button>
-          </div>
+      <div className="max-w-7xl mx-auto px-5 mb-8">
+        <div>
+          <h2 className="font-display text-2xl md:text-3xl text-stone">{cat.name}</h2>
+          <p className="text-sm text-stone/60 mt-1">{cat.tagline}</p>
         </div>
       </div>
 
-      <div
-        ref={scrollRef}
-        className="flex gap-4 md:gap-5 overflow-x-auto px-5 scrollbar-hide pb-4"
-        style={{
-          scrollSnapType: 'x mandatory',
-          WebkitOverflowScrolling: 'touch',
-          overscrollBehaviorX: 'contain',
-        }}
-      >
-        {cat.treatments.map((t, i) => (
-          <div key={t.name} className="card-wrapper shrink-0" style={{ scrollSnapAlign: 'start' }}>
-            <Card t={t} isCenter={i === centerIndex} />
-          </div>
-        ))}
-        <div className="min-w-5 md:min-w-[20px] shrink-0" />
+      <div className="max-w-7xl mx-auto px-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-5">
+          {cat.treatments.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+            >
+              <Card t={t} index={i} />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
 }
 
 export default function TreatmentCarousel() {
-  const showTreatmentsHeader = false // TODO: set to true to show header
+  const showTreatmentsHeader = false
 
   return (
     <section id="treatments" className="bg-vapor pb-8">
@@ -173,7 +108,6 @@ export default function TreatmentCarousel() {
         <CategorySection key={cat.name} cat={cat} index={i} />
       ))}
 
-      {/* Booking CTA at end of treatments */}
       <div className="text-center py-12">
         <a
           href="#book"

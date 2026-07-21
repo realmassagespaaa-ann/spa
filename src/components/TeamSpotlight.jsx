@@ -15,13 +15,13 @@ const ceo = {
 }
 
 const therapists = [
+  { name: 'Miracle', role: 'Personal Assistant', image: miracleImg },
   { name: 'Mirabel', role: 'Spa/Massage Therapist', image: mirabelImg },
   { name: 'Dorcas', role: 'Spa/Massage Therapist', image: dorcasImg },
   { name: 'Blessing', role: 'Spa/Massage Therapist', image: blessingImg },
   { name: 'Merit', role: 'Spa/Massage Therapist', image: meritImg },
   { name: 'Glory', role: 'Spa/Massage Therapist', image: gloryImg },
   { name: 'Gift', role: 'Spa/Massage Therapist', image: giftImg },
-  { name: 'Miracle', role: 'Personal Assistant', image: miracleImg },
 ]
 
 export default function TeamSpotlight() {
