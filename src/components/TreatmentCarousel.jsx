@@ -21,11 +21,11 @@ const categories = [
 ]
 
 const kenBurnsClasses = [
-  'animate-[ken-burns-1_18s_ease-in-out_infinite]',
-  'animate-[ken-burns-2_20s_ease-in-out_infinite]',
-  'animate-[ken-burns-3_22s_ease-in-out_infinite]',
-  'animate-[ken-burns-2_19s_ease-in-out_infinite]',
-  'animate-[ken-burns-1_21s_ease-in-out_infinite]',
+  'animate-ken-burns-1',
+  'animate-ken-burns-2',
+  'animate-ken-burns-3',
+  'animate-ken-burns-2',
+  'animate-ken-burns-1',
 ]
 
 function Card({ t, index }) {
