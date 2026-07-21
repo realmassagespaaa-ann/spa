@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const HERO_POSTER_IMAGE = null // swap to "/images/hero-fallback.jpg" once available
+const HERO_POSTER_IMAGE = '/videos/hero-poster.webp'
 
 export default function Hero() {
   const videoRef = useRef(null)
@@ -29,7 +29,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           poster={HERO_POSTER_IMAGE || undefined}
           onError={(e) => { e.currentTarget.style.display = 'none' }}
           className="absolute inset-0 w-full h-full object-cover"
