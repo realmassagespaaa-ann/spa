@@ -38,14 +38,15 @@ function Card({ t, index }) {
           alt={t.name}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ border: '6px solid red' }}
           initial={{ scale: 1, x: '0%', y: '0%' }}
           animate={v.target}
           transition={{ duration: v.duration, ease: 'easeInOut', repeat: Infinity, repeatType: 'mirror' }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone/80 via-stone/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-vapor">
+          <p style={{ color: 'red', fontWeight: 'bold' }}>DEBUG-CARD-V2</p>
           <h3 className="font-display text-lg leading-tight">{t.name}</h3>
-          <p className="text-xs text-vapor/60 mt-0.5">{t.duration} &middot; {t.price}</p>
         </div>
       </div>
     </div>
