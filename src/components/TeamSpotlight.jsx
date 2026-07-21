@@ -15,13 +15,13 @@ const ceo = {
 }
 
 const therapists = [
-  { name: 'Miracle', role: 'Personal Assistant', image: miracleImg },
-  { name: 'Mirabel', role: 'Spa/Massage Therapist', image: mirabelImg },
-  { name: 'Dorcas', role: 'Spa/Massage Therapist', image: dorcasImg },
-  { name: 'Blessing', role: 'Spa/Massage Therapist', image: blessingImg },
-  { name: 'Merit', role: 'Spa/Massage Therapist', image: meritImg },
-  { name: 'Glory', role: 'Spa/Massage Therapist', image: gloryImg },
-  { name: 'Gift', role: 'Spa/Massage Therapist', image: giftImg },
+  { name: 'Miracle', role: 'Personal Assistant', image: miracleImg, w: 600, h: 698 },
+  { name: 'Mirabel', role: 'Spa/Massage Therapist', image: mirabelImg, w: 600, h: 800 },
+  { name: 'Dorcas', role: 'Spa/Massage Therapist', image: dorcasImg, w: 600, h: 800 },
+  { name: 'Blessing', role: 'Spa/Massage Therapist', image: blessingImg, w: 600, h: 800 },
+  { name: 'Merit', role: 'Spa/Massage Therapist', image: meritImg, w: 600, h: 800 },
+  { name: 'Glory', role: 'Spa/Massage Therapist', image: gloryImg, w: 600, h: 800 },
+  { name: 'Gift', role: 'Spa/Massage Therapist', image: giftImg, w: 600, h: 800 },
 ]
 
 export default function TeamSpotlight() {
@@ -56,6 +56,7 @@ export default function TeamSpotlight() {
                 <img
                   src={ceo.image}
                   alt={ceo.name}
+                  width="960" height="1280"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -83,6 +84,7 @@ export default function TeamSpotlight() {
                   <img
                     src={t.image}
                     alt={t.name}
+                    width={t.w} height={t.h}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (

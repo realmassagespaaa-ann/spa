@@ -45,7 +45,7 @@ export default function FeatureGrid() {
                     muted
                     loop
                     playsInline
-                    preload="auto"
+                    preload="none"
                     className="absolute inset-0 w-full h-full object-cover"
                   >
                     <source src={f.video} type="video/mp4" />
@@ -54,6 +54,7 @@ export default function FeatureGrid() {
                   <img
                     src={f.image}
                     alt={f.alt}
+                    width="800" height="533"
                     loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover"
                   />

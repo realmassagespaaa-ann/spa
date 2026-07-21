@@ -27,7 +27,7 @@ export default function Nav() {
     >
       <nav className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
         <a href="#" className="block h-9">
-          <img src={logoSrc} alt="Real Massage Embassy & Spa" className="h-full w-auto" />
+          <img src={logoSrc} alt="Real Massage Embassy & Spa" width="80" height="80" className="h-full w-auto" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -75,9 +75,10 @@ export default function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            exit={{ opacity: 0, scaleY: 0 }}
+            style={{ transformOrigin: 'top' }}
             className="md:hidden bg-vapor/95 backdrop-blur-md overflow-hidden"
           >
             <div className="px-5 pb-6 pt-2 flex flex-col gap-4">

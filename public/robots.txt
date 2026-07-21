@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spa-30p.pages.dev/sitemap.xml

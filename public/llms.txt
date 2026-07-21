@@ -1,0 +1,13 @@
+# Real Massage Embassy & Spa
+
+> Premium massage and wellness studio with two locations, offering massage therapy, teeth whitening, rejuvenating facials, body exfoliation, pedicure, and manicure services.
+
+## Pages
+- [Home](https://spa-30p.pages.dev/): Overview of services, therapists, and locations
+
+## Locations
+- Ugbolokposo: King Jackson Hotel (opposite Bedouin Hotel)
+- Orerokpe: Dorvile Hotel
+
+## Contact
+- WhatsApp: https://wa.me/+2348133435521

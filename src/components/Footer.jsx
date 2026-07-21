@@ -22,7 +22,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 py-12 grid sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>
           <a href="#" className="block mb-3">
-            <img src={logoSrc} alt="Real Massage Embassy & Spa" className="h-10 w-auto" />
+            <img src={logoSrc} alt="Real Massage Embassy & Spa" width="80" height="80" className="h-10 w-auto" />
           </a>
           <p className="text-sm leading-relaxed">
             King Jackson Hotel (opposite Bedouin Hotel), Ugbolokposo<br />

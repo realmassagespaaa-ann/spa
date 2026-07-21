@@ -12,11 +12,11 @@ const categories = [
     name: 'Massages',
     tagline: 'Deep work, warm hands, real relief',
     treatments: [
-      { name: 'Deep Tissue', duration: '60 / 90 min', price: '$95 / $135', image: deepTissueImg },
-      { name: 'Swedish', duration: '60 / 90 min', price: '$85 / $125', image: swedishImg },
-      { name: 'Hot Stone', duration: '75 min', price: '$120', image: hotStoneImg },
-      { name: 'Prenatal', duration: '60 min', price: '$95', image: prenatalImg },
-      { name: 'Sports Recovery', duration: '60 / 90 min', price: '$105 / $145', image: sportsRecoveryImg },
+      { name: 'Deep Tissue', duration: '60 / 90 min', price: '$95 / $135', image: deepTissueImg, w: 554, h: 361 },
+      { name: 'Swedish', duration: '60 / 90 min', price: '$85 / $125', image: swedishImg, w: 501, h: 613 },
+      { name: 'Hot Stone', duration: '75 min', price: '$120', image: hotStoneImg, w: 600, h: 900 },
+      { name: 'Prenatal', duration: '60 min', price: '$95', image: prenatalImg, w: 783, h: 391 },
+      { name: 'Sports Recovery', duration: '60 / 90 min', price: '$105 / $145', image: sportsRecoveryImg, w: 275, h: 183 },
     ],
   },
 ]
@@ -45,7 +45,7 @@ function getBgSlot(cardIndex, activeIndex, isMobile) {
   return slots[offset - 1]
 }
 
-function Card({ t, isFeatured, bgSlot, isMobile }) {
+function Card({ t, isFeatured, bgSlot, isMobile, w: imgW, h: imgH }) {
   const w = isMobile ? '70vw' : '460px'
   const h = isMobile ? '82vw' : '550px'
 
@@ -67,6 +67,7 @@ function Card({ t, isFeatured, bgSlot, isMobile }) {
         <img
           src={t.image}
           alt={t.name}
+          width={imgW} height={imgH}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -146,7 +147,7 @@ export default function TreatmentCarousel() {
               const isFeatured = i === effectiveIndex
               const bgSlot = isFeatured ? null : getBgSlot(i, effectiveIndex, isMobile)
               return (
-                <Card key={t.name} t={t} isFeatured={isFeatured} bgSlot={bgSlot} isMobile={isMobile} />
+                <Card key={t.name} t={t} isFeatured={isFeatured} bgSlot={bgSlot} isMobile={isMobile} w={t.w} h={t.h} />
               )
             })}
           </div>

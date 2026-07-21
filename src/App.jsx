@@ -1,13 +1,15 @@
+import { lazy, Suspense } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Philosophy from './components/Philosophy'
-import TreatmentCarousel from './components/TreatmentCarousel'
-import TeamSpotlight from './components/TeamSpotlight'
-import FeatureGrid from './components/FeatureGrid'
-import Amenities from './components/Amenities'
-import HoursLocation from './components/HoursLocation'
-import CrossLinks from './components/CrossLinks'
-import Footer from './components/Footer'
+
+const TreatmentCarousel = lazy(() => import('./components/TreatmentCarousel'))
+const TeamSpotlight = lazy(() => import('./components/TeamSpotlight'))
+const FeatureGrid = lazy(() => import('./components/FeatureGrid'))
+const Amenities = lazy(() => import('./components/Amenities'))
+const HoursLocation = lazy(() => import('./components/HoursLocation'))
+const CrossLinks = lazy(() => import('./components/CrossLinks'))
+const Footer = lazy(() => import('./components/Footer'))
 
 export default function App() {
   return (
@@ -16,14 +18,18 @@ export default function App() {
       <main>
         <Hero />
         <Philosophy />
-        <TreatmentCarousel />
-        <TeamSpotlight />
-        <FeatureGrid />
-        <Amenities />
-        <HoursLocation />
-        <CrossLinks />
+        <Suspense fallback={null}>
+          <TreatmentCarousel />
+          <TeamSpotlight />
+          <FeatureGrid />
+          <Amenities />
+          <HoursLocation />
+          <CrossLinks />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
       {/* Floating WhatsApp button */}
       <a
