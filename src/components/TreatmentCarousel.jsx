@@ -25,17 +25,17 @@ const TOTAL_CARDS = 5
 const CYCLE_MS = 2800
 
 const BG_SLOTS_DESKTOP = [
-  { x: '-70%', y: '-28%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
-  { x: '70%', y: '-28%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
-  { x: '-55%', y: '32%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
-  { x: '55%', y: '32%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
+  { x: '-108%', y: '-39%', scale: 0.42, opacity: 0.4, blur: 2, zIndex: 5 },
+  { x: '108%', y: '-39%', scale: 0.42, opacity: 0.4, blur: 2, zIndex: 5 },
+  { x: '-85%', y: '36%', scale: 0.36, opacity: 0.35, blur: 3, zIndex: 4 },
+  { x: '85%', y: '36%', scale: 0.36, opacity: 0.35, blur: 3, zIndex: 4 },
 ]
 
 const BG_SLOTS_MOBILE = [
-  { x: '-45%', y: '-22%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
-  { x: '45%', y: '-22%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
-  { x: '-35%', y: '28%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
-  { x: '35%', y: '28%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
+  { x: '-50%', y: '-38%', scale: 0.28, opacity: 0.35, blur: 2, zIndex: 5 },
+  { x: '50%', y: '-38%', scale: 0.28, opacity: 0.35, blur: 2, zIndex: 5 },
+  { x: '-40%', y: '30%', scale: 0.2, opacity: 0, blur: 3, zIndex: 4 },
+  { x: '40%', y: '30%', scale: 0.2, opacity: 0, blur: 3, zIndex: 4 },
 ]
 
 function getBgSlot(cardIndex, activeIndex, isMobile) {
@@ -46,8 +46,8 @@ function getBgSlot(cardIndex, activeIndex, isMobile) {
 }
 
 function Card({ t, isFeatured, bgSlot, isMobile }) {
-  const w = isMobile ? '55vw' : '280px'
-  const h = isMobile ? '66vw' : '340px'
+  const w = isMobile ? '70vw' : '460px'
+  const h = isMobile ? '82vw' : '550px'
 
   return (
     <motion.div
@@ -141,7 +141,7 @@ export default function TreatmentCarousel() {
             <p className="text-sm text-stone/60 mt-1">{cat.tagline}</p>
           </div>
 
-          <div className="relative max-w-4xl mx-auto h-[380px] md:h-[480px]">
+          <div className="relative max-w-7xl mx-auto h-[450px] md:h-[620px]">
             {cat.treatments.map((t, i) => {
               const isFeatured = i === effectiveIndex
               const bgSlot = isFeatured ? null : getBgSlot(i, effectiveIndex, isMobile)
