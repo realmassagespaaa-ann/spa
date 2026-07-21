@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 import deepTissueImg from '../assets/images/treatments-massage-deep-tissue.webp'
 import swedishImg from '../assets/images/treatments-massage-swedish.webp'
@@ -20,38 +21,37 @@ const categories = [
   },
 ]
 
-const kenBurnsVariants = [
-  { target: { scale: 1.2, x: '-2%', y: '-1.5%' }, duration: 9 },
-  { target: { scale: 1.18, x: '2%', y: '1%' }, duration: 10 },
-  { target: { scale: 1.15, x: '-1%', y: '2%' }, duration: 8 },
-  { target: { scale: 1.2, x: '2%', y: '1%' }, duration: 9 },
-  { target: { scale: 1.18, x: '-2%', y: '-1.5%' }, duration: 10 },
-]
+const TOTAL_CARDS = 5
+const CYCLE_MS = 2500
 
-function Card({ t, index }) {
-  const v = kenBurnsVariants[index % kenBurnsVariants.length]
+function Card({ t, isActive }) {
   return (
-    <div className="relative group">
-      <div className="relative h-[340px] rounded-sm overflow-hidden shadow-[0_2px_8px_rgba(61,50,43,0.08)] transition-all duration-500 ease-out group-hover:-translate-y-1.5 group-hover:shadow-[0_8px_24px_rgba(61,50,43,0.15)]">
-        <motion.img
+    <motion.div
+      className="relative group"
+      animate={{
+        scale: isActive ? 1.2 : 0.95,
+        opacity: isActive ? 1 : 0.55,
+        zIndex: isActive ? 10 : 1,
+      }}
+      transition={{ duration: 0.45, ease: 'easeOut' }}
+    >
+      <div className="relative h-[340px] rounded-sm overflow-hidden shadow-[0_2px_8px_rgba(61,50,43,0.08)]">
+        <img
           src={t.image}
           alt={t.name}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1, x: '0%', y: '0%' }}
-          animate={v.target}
-          transition={{ duration: v.duration, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone/80 via-stone/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-vapor">
           <h3 className="font-display text-lg leading-tight">{t.name}</h3>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
-function CategorySection({ cat, index }) {
+function CategorySection({ cat, activeIndex }) {
   return (
     <section className="py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-5 mb-8">
@@ -71,7 +71,7 @@ function CategorySection({ cat, index }) {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <Card t={t} index={i} />
+              <Card t={t} isActive={i === activeIndex} />
             </motion.div>
           ))}
         </div>
@@ -81,6 +81,25 @@ function CategorySection({ cat, index }) {
 }
 
 export default function TreatmentCarousel() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(mq.matches)
+    const handler = (e) => setReducedMotion(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) return
+    const id = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % TOTAL_CARDS)
+    }, CYCLE_MS)
+    return () => clearInterval(id)
+  }, [reducedMotion])
+
   const showTreatmentsHeader = false
 
   return (
@@ -107,8 +126,8 @@ export default function TreatmentCarousel() {
         </div>
       )}
 
-      {categories.map((cat, i) => (
-        <CategorySection key={cat.name} cat={cat} index={i} />
+      {categories.map((cat) => (
+        <CategorySection key={cat.name} cat={cat} activeIndex={activeIndex} />
       ))}
 
       <div className="text-center py-12">
