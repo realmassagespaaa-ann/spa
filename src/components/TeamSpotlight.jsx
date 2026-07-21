@@ -42,33 +42,33 @@ export default function TeamSpotlight() {
           </p>
         </motion.div>
 
-        {/* CEO card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          className="mb-12 group"
-        >
-          <div className="relative aspect-[16/9] md:aspect-[4/1] overflow-hidden rounded-sm mb-4 bg-stone/20 flex items-center justify-center">
-            {ceo.image ? (
-              <img
-                src={ceo.image}
-                alt={ceo.name}
-                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-            ) : (
-              <div className="flex flex-col items-center text-stone/30">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <span className="text-xs font-mono mt-1">{ceo.name}</span>
-              </div>
-            )}
-          </div>
-          <h3 className="font-display text-xl text-stone">{ceo.name}</h3>
-          <p className="text-xs font-mono text-sage uppercase tracking-wide mt-1">{ceo.role}</p>
-        </motion.div>
-
         {/* Therapists grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">
+          {/* CEO card — featured, spans 2 columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            className="col-span-2 group"
+          >
+            <div className="relative aspect-[3/4] overflow-hidden rounded-sm mb-3 bg-stone/20 flex items-center justify-center">
+              {ceo.image ? (
+                <img
+                  src={ceo.image}
+                  alt={ceo.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <div className="flex flex-col items-center text-stone/30">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" opacity="0.4"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <span className="text-xs font-mono mt-1">{ceo.name}</span>
+                </div>
+              )}
+            </div>
+            <h3 className="font-display text-xl text-stone">{ceo.name}</h3>
+            <p className="text-xs font-mono text-sage uppercase tracking-wide mt-1">{ceo.role}</p>
+          </motion.div>
+
           {therapists.map((t, i) => (
             <motion.div
               key={t.name}
