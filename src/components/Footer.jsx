@@ -1,3 +1,5 @@
+import logoSrc from '../assets/images/logo-real-massage-embassy-spa.webp'
+
 export default function Footer() {
   return (
     <footer id="book" className="bg-stone text-vapor/70">
@@ -19,7 +21,9 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-5 py-12 grid sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <h4 className="font-display text-vapor text-lg mb-3">Real Massage Embassy &amp; Spa</h4>
+          <a href="#" className="block mb-3">
+            <img src={logoSrc} alt="Real Massage Embassy & Spa" className="h-10 w-auto" />
+          </a>
           <p className="text-sm leading-relaxed">
             King Jackson Hotel (opposite Bedouin Hotel), Ugbolokposo<br />
             Dorvile Hotel, Orerokpe

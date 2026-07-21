@@ -1,18 +1,25 @@
 import { motion } from 'framer-motion'
+import ceoImg from '../assets/images/team-ikayi-annah-ediri.webp'
+import mirabelImg from '../assets/images/team-mirabel.webp'
+import dorcasImg from '../assets/images/team-dorcas.webp'
+import blessingImg from '../assets/images/team-blessing.webp'
+import meritImg from '../assets/images/team-merit.webp'
+import gloryImg from '../assets/images/team-glory.webp'
+import giftImg from '../assets/images/team-gift.webp'
 
 const ceo = {
   name: 'Ikayi Annah Ediri',
   role: 'CEO',
-  image: null, // swap to "/images/team-ikayi-annah-ediri.webp" once available
+  image: ceoImg,
 }
 
 const therapists = [
-  { name: 'Mirabel', role: 'Spa/Massage Therapist', image: null },
-  { name: 'Dorcas', role: 'Spa/Massage Therapist', image: null },
-  { name: 'Blessing', role: 'Spa/Massage Therapist', image: null },
-  { name: 'Merit', role: 'Spa/Massage Therapist', image: null },
-  { name: 'Glory', role: 'Spa/Massage Therapist', image: null },
-  { name: 'Gift', role: 'Spa/Massage Therapist', image: null },
+  { name: 'Mirabel', role: 'Spa/Massage Therapist', image: mirabelImg },
+  { name: 'Dorcas', role: 'Spa/Massage Therapist', image: dorcasImg },
+  { name: 'Blessing', role: 'Spa/Massage Therapist', image: blessingImg },
+  { name: 'Merit', role: 'Spa/Massage Therapist', image: meritImg },
+  { name: 'Glory', role: 'Spa/Massage Therapist', image: gloryImg },
+  { name: 'Gift', role: 'Spa/Massage Therapist', image: giftImg },
   { name: 'Miracle', role: 'Personal Assistant', image: null },
 ]
 
