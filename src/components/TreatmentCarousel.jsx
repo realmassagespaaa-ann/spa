@@ -22,20 +22,48 @@ const categories = [
 ]
 
 const TOTAL_CARDS = 5
-const CYCLE_MS = 2500
+const CYCLE_MS = 2800
 
-function Card({ t, isActive }) {
+const BG_SLOTS_DESKTOP = [
+  { x: '-34%', y: '18%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
+  { x: '34%', y: '18%', scale: 0.44, opacity: 0.4, blur: 2, zIndex: 5 },
+  { x: '-18%', y: '36%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
+  { x: '18%', y: '36%', scale: 0.38, opacity: 0.35, blur: 3, zIndex: 4 },
+]
+
+const BG_SLOTS_MOBILE = [
+  { x: '-42%', y: '10%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
+  { x: '42%', y: '10%', scale: 0.32, opacity: 0.35, blur: 2, zIndex: 5 },
+  { x: '-36%', y: '22%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
+  { x: '36%', y: '22%', scale: 0.26, opacity: 0.3, blur: 3, zIndex: 4 },
+]
+
+function getBgSlot(cardIndex, activeIndex, isMobile) {
+  const offset = (cardIndex - activeIndex + TOTAL_CARDS) % TOTAL_CARDS
+  if (offset === 0) return null
+  const slots = isMobile ? BG_SLOTS_MOBILE : BG_SLOTS_DESKTOP
+  return slots[offset - 1]
+}
+
+function Card({ t, isFeatured, bgSlot, isMobile }) {
+  const w = isMobile ? '55vw' : '280px'
+  const h = isMobile ? '66vw' : '340px'
+
   return (
     <motion.div
-      className="relative group"
+      className="absolute inset-0 m-auto rounded-sm overflow-hidden"
+      style={{ width: w, height: h }}
       animate={{
-        scale: isActive ? 1.2 : 0.95,
-        opacity: isActive ? 1 : 0.55,
-        zIndex: isActive ? 10 : 1,
+        scale: isFeatured ? 1 : bgSlot.scale,
+        x: isFeatured ? 0 : bgSlot.x,
+        y: isFeatured ? 0 : bgSlot.y,
+        opacity: isFeatured ? 1 : bgSlot.opacity,
+        zIndex: isFeatured ? 10 : bgSlot.zIndex,
+        filter: isFeatured ? 'blur(0px)' : `blur(${bgSlot.blur}px)`,
       }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <div className="relative h-[340px] rounded-sm overflow-hidden shadow-[0_2px_8px_rgba(61,50,43,0.08)]">
+      <div className="relative w-full h-full rounded-sm overflow-hidden shadow-[0_4px_20px_rgba(61,50,43,0.15)]">
         <img
           src={t.image}
           alt={t.name}
@@ -51,38 +79,10 @@ function Card({ t, isActive }) {
   )
 }
 
-function CategorySection({ cat, activeIndex }) {
-  return (
-    <section className="py-16 md:py-20">
-      <div className="max-w-7xl mx-auto px-5 mb-8">
-        <div>
-          <h2 className="font-display text-2xl md:text-3xl text-stone">{cat.name}</h2>
-          <p className="text-sm text-stone/60 mt-1">{cat.tagline}</p>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-5">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-5">
-          {cat.treatments.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-            >
-              <Card t={t} isActive={i === activeIndex} />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 export default function TreatmentCarousel() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -90,6 +90,13 @@ export default function TreatmentCarousel() {
     const handler = (e) => setReducedMotion(e.matches)
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
   useEffect(() => {
@@ -101,6 +108,7 @@ export default function TreatmentCarousel() {
   }, [reducedMotion])
 
   const showTreatmentsHeader = false
+  const effectiveIndex = reducedMotion ? 0 : activeIndex
 
   return (
     <section id="treatments" className="bg-vapor pb-8">
@@ -127,7 +135,22 @@ export default function TreatmentCarousel() {
       )}
 
       {categories.map((cat) => (
-        <CategorySection key={cat.name} cat={cat} activeIndex={activeIndex} />
+        <section key={cat.name} className="py-16 md:py-20">
+          <div className="max-w-7xl mx-auto px-5 mb-8">
+            <h2 className="font-display text-2xl md:text-3xl text-stone">{cat.name}</h2>
+            <p className="text-sm text-stone/60 mt-1">{cat.tagline}</p>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto h-[380px] md:h-[480px]">
+            {cat.treatments.map((t, i) => {
+              const isFeatured = i === effectiveIndex
+              const bgSlot = isFeatured ? null : getBgSlot(i, effectiveIndex, isMobile)
+              return (
+                <Card key={t.name} t={t} isFeatured={isFeatured} bgSlot={bgSlot} isMobile={isMobile} />
+              )
+            })}
+          </div>
+        </section>
       ))}
 
       <div className="text-center py-12">
