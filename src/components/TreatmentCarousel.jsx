@@ -21,11 +21,11 @@ const categories = [
 ]
 
 const kenBurnsVariants = [
-  { scale: [1, 1.1, 1], x: ['0%', '-1.5%', '0%'], y: ['0%', '-1%', '0%'], duration: 18 },
-  { scale: [1, 1.1, 1], x: ['0%', '1.5%', '0%'], y: ['0%', '0.5%', '0%'], duration: 20 },
-  { scale: [1, 1.08, 1], x: ['0%', '-0.5%', '0%'], y: ['0%', '1.5%', '0%'], duration: 22 },
-  { scale: [1, 1.1, 1], x: ['0%', '1.5%', '0%'], y: ['0%', '0.5%', '0%'], duration: 19 },
-  { scale: [1, 1.1, 1], x: ['0%', '-1.5%', '0%'], y: ['0%', '-1%', '0%'], duration: 21 },
+  { target: { scale: 1.1, x: '-1.5%', y: '-1%' }, duration: 18 },
+  { target: { scale: 1.1, x: '1.5%', y: '0.5%' }, duration: 20 },
+  { target: { scale: 1.08, x: '-0.5%', y: '1.5%' }, duration: 22 },
+  { target: { scale: 1.1, x: '1.5%', y: '0.5%' }, duration: 19 },
+  { target: { scale: 1.1, x: '-1.5%', y: '-1%' }, duration: 21 },
 ]
 
 function Card({ t, index }) {
@@ -38,8 +38,9 @@ function Card({ t, index }) {
           alt={t.name}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
-          animate={{ scale: v.scale, x: v.x, y: v.y }}
-          transition={{ duration: v.duration, ease: 'easeInOut', repeat: Infinity }}
+          initial={{ scale: 1, x: '0%', y: '0%' }}
+          animate={v.target}
+          transition={{ duration: v.duration, ease: 'easeInOut', repeat: Infinity, repeatType: 'mirror' }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone/80 via-stone/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-vapor">
