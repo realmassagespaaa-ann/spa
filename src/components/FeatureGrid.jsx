@@ -1,11 +1,12 @@
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const features = [
   {
     title: 'The Couples Suite',
     body: 'Side-by-side treatment tables in a private room with shared steam. Both partners get the same therapist quality — same pressure, same timing, same undivided attention. No second-class massage for the person on the left.',
-    image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80',
-    alt: 'Side-by-side treatment tables in a softly lit room with warm wood accents',
+    video: '/videos/couples-suite.mp4',
+    alt: 'Couples massage suite with side-by-side treatment tables in a softly lit room',
     reversed: false,
   },
   {
@@ -24,6 +25,52 @@ const features = [
   },
 ]
 
+function FeatureMedia({ f }) {
+  const videoRef = useRef(null)
+  const [reduceMotion, setReduceMotion] = useState(false)
+  const [videoFailed, setVideoFailed] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduceMotion(mq.matches)
+    const handler = (e) => setReduceMotion(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  if (f.video) {
+    const show = !reduceMotion && !videoFailed
+    return (
+      <>
+        {show && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onError={() => setVideoFailed(true)}
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={f.video} type="video/mp4" />
+          </video>
+        )}
+      </>
+    )
+  }
+
+  return (
+    <img
+      src={f.image}
+      alt={f.alt}
+      width="800" height="533"
+      loading="lazy"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  )
+}
+
 export default function FeatureGrid() {
   return (
     <section className="bg-vapor py-24 md:py-32 px-5">
@@ -39,26 +86,7 @@ export default function FeatureGrid() {
           >
             <div className={`${f.reversed ? 'md:order-2' : ''}`}>
               <div className="relative h-[320px] md:h-[400px] overflow-hidden rounded-sm">
-                {f.video ? (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="none"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  >
-                    <source src={f.video} type="video/mp4" />
-                  </video>
-                ) : (
-                  <img
-                    src={f.image}
-                    alt={f.alt}
-                    width="800" height="533"
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                )}
+                <FeatureMedia f={f} />
                 <div className="absolute inset-0 bg-stone/10" />
               </div>
             </div>
